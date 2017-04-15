@@ -1,6 +1,5 @@
 var dotenv = require('dotenv');
 var express = require('express');
-var favicon = require('serve-favicon');
 var path = require('path');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
@@ -10,7 +9,6 @@ var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" +
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.get('/', (req, res) => {
     MongoClient.connect(url, function(err, db) {
