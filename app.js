@@ -9,7 +9,7 @@ var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" +
 
 app.set('view engine', 'ejs');
 
-app.use(favicon(path.join(__dirname, 'public', 'facvicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
