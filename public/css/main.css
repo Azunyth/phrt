@@ -1,3 +1,7 @@
 div.main-container {
     padding-top: 60px;
 }
+
+div.iframe-container {
+    margin: 20px;
+}

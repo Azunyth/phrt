@@ -1,30 +1,33 @@
+var dotenv = require('dotenv');
 var express = require('express');
+var favicon = require('serve-favicon');
+var path = require('path');
 var app = express();
-var ph = require('pornhub');
-var csv = require('csv');
 var MongoClient = require('mongodb').MongoClient;
-var db;
-var url = "mongodb://localhost:27017/phrt";
+require('./config');
+var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 
 app.set('view engine', 'ejs');
 
+app.use(favicon(path.join(__dirname, 'public', 'facvicon.ico')));
 app.use(express.static(__dirname + '/public'));
-
-MongoClient.connect(url, (err, database) => {
-    console.log('Database conected');
-    db = database;
-})
 
 app.get('/', (req, res) => {
     MongoClient.connect(url, function(err, db) {
             console.log("Connected successfully to server");
-            db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, res) {
-                    var keys = Object.keys(res[0]);
-                    res.render('index.ejs', { iframe: res[0][keys[1]] });
+            db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
+                    var keys = Object.keys(video[0]);
+                    res.render('index.ejs', { iframe: video[0][keys[1]] });
             });
     });
 });
 
-app.listen(1337, () => {
-    console.log("App running on http://localhost");
-});                                                
+app.all('*', (req, res) => {
+    res.status(404).render('404');
+});
+
+var port = process.env.PORT || 1337;
+
+app.listen(port, () => {
+    console.log(`App running on port: ${port}`);
+});
