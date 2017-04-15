@@ -9,8 +9,8 @@ var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" +
 
 app.set('view engine', 'ejs');
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(__dirname + '/public'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.get('/', (req, res) => {
     MongoClient.connect(url, function(err, db) {
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.all('*', (req, res) => {
-    res.status(404).render('404');
+    res.status(404).render('404.ejs');
 });
 
 var port = process.env.PORT || 1337;
