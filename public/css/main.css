@@ -5,6 +5,12 @@ nav a.navbar-brand {
 nav a.navbar-brand div.brand {
     display: flex;
     padding-top: 2px;
+    align-items: center;
+    color: white;
+}
+
+nav a.navbar-brand div.brand img {
+    margin-right: 5px;
 }
 
 div.main-container {
