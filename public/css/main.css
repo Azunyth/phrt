@@ -4,4 +4,40 @@ div.main-container {
 
 div.iframe-container {
     margin: 20px;
+    /*display: inline-block;*/
+    position: relative;
 }
+
+div.wheel-wrapper {
+    display: none;
+    /*display: inline-block;
+    position: relative;*/
+}
+/*
+button.btn-launch {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 125px;
+    left: 125px;
+    border-radius: 125px;
+    font-size: 25px;
+    color: #fff;
+    background-color: #f387b2;
+    border-color: #f381ae;
+}
+
+button.btn-launch:hover {
+    color: #fff;
+    background-color: #e16697;
+    border-color: #cf5686;
+}
+
+div.wheel-wrapper img.turn {
+    animation: turn 0.5s linear infinite;
+}
+
+@keyframes turn {
+    from { transform: rotateZ(0deg);}
+    to { transform: rotateZ(360deg);}
+}*/

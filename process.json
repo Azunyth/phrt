@@ -6,5 +6,6 @@
     "exec_mode" : "cluster",
     "watch": true,
     "ignore_watch" : ["node_modules", ".git", ".env"],
+    "cwd" : "/root/node/phrt/"
   }]
 }
