@@ -10,17 +10,19 @@ router.get('/random-video', (req, res) => {
     var isAjax = req.xhr;
     var videoFound = false;
 
-    req.db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
-        if('IFRAME' in video) {
-            videoFound = true;
-            var vid = { iframe: video.IFRAME }
-            if(isAjax) {
-                res.json(vid);
-            } else {
-                res.render('random.ejs', vid);
+    do {
+        req.db.collection('datacontent').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
+            if('IFRAME' in video) {
+                videoFound = true;
+                var vid = { iframe: video.IFRAME }
+                if(isAjax) {
+                    res.json(vid);
+                } else {
+                    res.render('random.ejs', vid);
+                }
             }
-        }
-    });
+        });
+    } while(!videoFound);
 
 });
 
