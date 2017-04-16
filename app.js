@@ -11,13 +11,12 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-    res.render('index.ejs');
-    // MongoClient.connect(url, function(err, db) {
-    //         db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
-    //                 var keys = Object.keys(video[0]);
-    //                 res.render('index.ejs', { iframe: video[0][keys[1]] });
-    //         });
-    // });
+    MongoClient.connect(url, function(err, db) {
+            db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
+                    var keys = Object.keys(video[0]);
+                    res.render('index.ejs', { iframe: video[0][keys[1]] });
+            });
+    });
 });
 
 app.all('*', (req, res) => {
