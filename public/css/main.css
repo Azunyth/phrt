@@ -24,6 +24,7 @@ div.iframe-container {
 
 div.iframe-wrapper {
     display: none;
+    position: relative;
 }
 
 div.wheel-wrapper {
@@ -63,6 +64,7 @@ div.wheel-container.collapse-wheel {
     top: 0;
     left: 0;
     width: 100%;
+    animation: gobehind 0s linear 1s forwards;
 }
 
 div.wheel-container .wheel-wrapper.collapse-wheel {
@@ -78,5 +80,11 @@ div.wheel-container .wheel-wrapper.collapse-wheel {
 @keyframes collapse {
     100% {
         transform: scale(0);
+    }
+}
+
+@keyframes gobehind {
+    100% {
+        z-index: -1;
     }
 }
