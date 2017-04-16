@@ -12,7 +12,8 @@ $(document).ready(function(){
             }).then(function(res) {
                 if(res.iframe) {
                     $("div.wheel-container, div.wheel-wrapper").addClass('collapse-wheel');
-                    $(res.iframe).appendTo("div.iframe-wrapper");
+                    $("div.iframe-wrapper").append($.parseHTML(res.iframe));
+
                     $('<a href="/" class="btn btn-danger btn-lg">Give me another random fap !</a>').appendTo("div.iframe-container");
 
                     $("div.iframe-wrapper").toggle();
