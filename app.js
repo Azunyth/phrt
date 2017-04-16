@@ -12,7 +12,7 @@ MongoClient.connect(url, (err, database) => {
 
     db = database;
 
-    app.listen(port, () => {
+    app.listen(port, process.env.HOST, () => {
         console.log(`App running on port: ${port}`);
     });
 });
