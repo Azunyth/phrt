@@ -4,17 +4,19 @@ div.main-container {
 
 div.iframe-container {
     margin: 20px;
-    /*display: inline-block;*/
     position: relative;
 }
 
-div.wheel-wrapper {
+div.iframe-wrapper {
     display: none;
-    /*display: inline-block;
-    position: relative;*/
 }
-/*
-button.btn-launch {
+
+div.wheel-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+div.btn-launch {
     position: absolute;
     width: 250px;
     height: 250px;
@@ -25,19 +27,41 @@ button.btn-launch {
     color: #fff;
     background-color: #f387b2;
     border-color: #f381ae;
+    text-align: center;
+    line-height: 250px;
+    vertical-align: middle;
 }
 
-button.btn-launch:hover {
+div.btn-launch:hover {
+    cursor: pointer;
     color: #fff;
     background-color: #e16697;
     border-color: #cf5686;
 }
 
 div.wheel-wrapper img.turn {
-    animation: turn 0.5s linear infinite;
+    animation: turn 20s linear infinite;
+}
+
+div.wheel-container.collapse-wheel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+div.wheel-container .wheel-wrapper.collapse-wheel {
+    animation: collapse 1s linear;
+    animation-fill-mode: forwards;
 }
 
 @keyframes turn {
     from { transform: rotateZ(0deg);}
     to { transform: rotateZ(360deg);}
-}*/
+}
+
+@keyframes collapse {
+    100% {
+        transform: scale(0);
+    }
+}
