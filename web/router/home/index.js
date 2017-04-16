@@ -11,7 +11,7 @@ router.get('/random-video', (req, res) => {
     var videoFound = false;
 
     do {
-        req.db.collection('datacontent').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
+        req.db.collection('datacontent').aggregate([ { $sample: { size: 1 } } ]).nextObject(function(err, video) {
             if('IFRAME' in video) {
                 videoFound = true;
                 var vid = { iframe: video.IFRAME }
