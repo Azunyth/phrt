@@ -8,21 +8,20 @@ router.get('/', (req, res) => {
 
 router.get('/random-video', (req, res) => {
     var isAjax = req.xhr;
-    var videoFound = false;
 
-    do {
-        req.db.collection('datacontent').aggregate([ { $sample: { size: 1 } } ]).nextObject(function(err, video) {
-            if('IFRAME' in video) {
-                videoFound = true;
-                var vid = { iframe: video.IFRAME }
-                if(isAjax) {
-                    res.json(vid);
-                } else {
-                    res.render('random.ejs', vid);
-                }
-            }
-        });
-    } while(!videoFound);
+    req.db.collection('datacontent').aggregate([ { $sample: { size: 1 } } ]).nextObject(function(err, video) {
+        var vid = { iframe: 'Oops error while getting video' };
+        if('IFRAME' in video) {
+            vid.iframe = video.IFRAME;
+        }
+        
+        if(isAjax) {
+            res.json(vid);
+        } else {
+            res.render('random.ejs', vid);
+        }
+
+    });
 
 });
 
