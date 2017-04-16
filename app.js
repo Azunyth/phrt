@@ -1,5 +1,4 @@
 var dotenv = require('dotenv');
-var express = require('express');
 var path = require('path');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
@@ -11,7 +10,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-    console.log(req.ip);
     MongoClient.connect(url, function(err, db) {
             db.collection('videos').aggregate(    [ { $sample: { size: 1 } } ], function(err, video) {
                     var keys = Object.keys(video[0]);
