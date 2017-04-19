@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     var giveme = "Give me another random fap !";
     var wait = 'Randomizing your fap... <span class="loader"></span>';
+    var urlWatch = 'http://faproulette.win/watch/';
 
     $("div.btn-launch").on("click", function(e) {
         $(this).siblings('img').eq(0).css({
@@ -18,6 +19,9 @@ $(document).ready(function(){
                     changeIframe(res.iframe);
                     $('<button class="btn btn-danger btn-lg btn-reload">'+giveme+'</button>').appendTo("div.iframe-container");
                     $("div.iframe-wrapper").toggle();
+                    var randomVideoUrl = urlWatch + res.id;
+                    $(".share-link-modal a.link-video").attr('src', randomVideoUrl);
+                    $(".share-link-modal a.link-video").html(randomVideoUrl);
                 }
             })
         }, 1000)

@@ -40,6 +40,10 @@
         <div class="main-container">
             <div class="container text-center">
                 <div class="iframe-container">
+                    <div class="loading-infos">
+                        <span class="big-loader"></span>
+                        <p class="loader-text">Random done, fap incomming</p>
+                    </div>
                     <div class="iframe-wrapper">
 
                     </div>
@@ -51,7 +55,28 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+                <div class="share-container">
+                    <button class="btn btn-primary btn-sm btn-share" data-toggle="modal" data-target=".share-link-modal">
+                        <i class="glyphicon glyphicon-share"></i> Share link
+                    </button>
+                </div>
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade share-link-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Share link</h4>
+                </div>
+                  <div class="modal-body">
+                      Don't be shy, share your fap :
+                      <a href="http://faproulette.win" class="link-video">http://faproulette.win</a>
+                  </div>
+            </div>
+          </div>
         </div>
 
         <script type="text/javascript">

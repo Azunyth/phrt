@@ -97,10 +97,17 @@ span.big-loader {
     animation: spin 2s linear infinite;
 }
 
-div.iframe-container > span.big-loader {
+div.iframe-container > div.loading-infos {
     position: absolute;
     left: calc(50% - 60px);
     top: calc(50% - 60px);
+}
+
+ div.loading-infos p.loader-text {
+     position: absolute;
+     width: 100%;
+     color: #FF96C0;
+     font-weight: bold;
 }
 
 button.btn-reload span.loader {

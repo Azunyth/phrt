@@ -11,9 +11,10 @@ router.get('/random-video', (req, res) => {
     var isAjax = req.xhr;
 
     req.db.collection('datacontent').aggregate([ { $sample: { size: 1 } } ]).nextObject(function(err, video) {
-        var vid = { iframe: 'Oops error while getting video' };
+        var vid = { iframe: 'Oops error while getting video', id:undefined };
         if('IFRAME' in video) {
             vid.iframe = video.IFRAME;
+            vid.id = video._id;
         }
 
         if(isAjax) {
@@ -35,8 +36,8 @@ router.get('/watch/:id', (req, res) => {
             if(err) {
                 console.log(err);
             }
-            
-            res.render('random.ejs', {iframe: video.IFRAME});
+
+            res.render('random.ejs', {iframe: video.IFRAME, id: video._id});
         })
     } else {
         res.render('404.ejs');
