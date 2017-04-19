@@ -87,6 +87,22 @@ span.loader {
     animation: spin 2s linear infinite;
 }
 
+span.big-loader {
+    display: inline-block;
+    border: 15px solid rgba(255,150,192,0.4);
+    border-top: 15px solid rgba(255,0,63,0.8);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+div.iframe-container > span.big-loader {
+    position: absolute;
+    left: calc(50% - 60px);
+    top: calc(50% - 60px);
+}
+
 button.btn-reload span.loader {
     margin-left: 10px;
 }

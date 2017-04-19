@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var ObjectId = require('mongodb').ObjectId;
 
 router.get('/', (req, res) => {
     req.db.collection('video').find((err, data) =>  {
@@ -24,5 +25,22 @@ router.get('/random-video', (req, res) => {
     });
 
 });
+
+router.get('/watch/:id', (req, res) => {
+    var regObjId = /^[0-9a-fA-F]{24}$/;
+    var id = req.params.id;
+
+    if(regObjId.test(id)) {
+        req.db.collection('datacontent').findOne({_id: ObjectId(id)}, function(err, video) {
+            if(err) {
+                console.log(err);
+            }
+            
+            res.render('random.ejs', {iframe: video.IFRAME});
+        })
+    } else {
+        res.render('404.ejs');
+    }
+})
 
 module.exports = router;
