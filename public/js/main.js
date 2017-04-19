@@ -20,7 +20,7 @@ $(document).ready(function(){
                     $('<button class="btn btn-danger btn-lg btn-reload">'+giveme+'</button>').appendTo("div.iframe-container");
                     $("div.iframe-wrapper").toggle();
                     var randomVideoUrl = urlWatch + res.id;
-                    $(".share-link-modal a.link-video").attr('src', randomVideoUrl);
+                    $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
                     $(".share-link-modal a.link-video").html(randomVideoUrl);
                 }
             })
