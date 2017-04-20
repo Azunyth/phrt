@@ -114,6 +114,26 @@ button.btn-reload span.loader {
     margin-left: 10px;
 }
 
+div.share-container {
+    display: flex;
+    justify-content: center;
+}
+
+div.share-container button:not(:last-child) {
+    margin-right: 8px;
+}
+
+button.btn-fb-share {
+    background-color: #4267b2;
+    color: white;
+}
+
+button.btn-fb-share:hover {
+    background-color: #365899;
+    color: white;
+}
+
+
 @keyframes spin {
     from { transform: rotateZ(0deg);}
     to { transform: rotateZ(360deg);}
