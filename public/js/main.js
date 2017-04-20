@@ -6,9 +6,6 @@ $(document).ready(function(){
           xfbml      : true,
           version    : 'v2.9'
         });
-        //FB.AppEvents.logPageView();
-
-
       };
 
     (function(d, s, id){
@@ -69,12 +66,7 @@ $(document).ready(function(){
 
     $("button.btn-fb-share").on('click', function(e) {
         var self = $(this);
-        var urlToShare = baseUrl;
-        var videoId = self.attr('data-id');
-
-        if(videoId != undefined) {
-            urlToShare = urlWatch + videoId;
-        }
+        var urlToShare = getUrl(self.attr('data-id'));
 
         FB.ui({
             method: 'share',
@@ -84,6 +76,17 @@ $(document).ready(function(){
         }, function(response){});
     });
 
+    $("button.btn-tw-share").on('click', function(e) {
+        var self = $(this);
+        var text = encodeURI("The FapRoulette has choosen for me !");
+        var urlToShare = encodeURI(getUrl(self.attr('data-id')));
+
+        var link = "https://twitter.com/intent/tweet?text="+text+"&url="+urlToShare;
+
+        window.open(link, '_blank', 'toolbar=0,location=0,menubar=0, width=500, height=250');
+
+    })
+
     var changeIframe = function(iframe) {
         $("div.iframe-wrapper").empty().append($.parseHTML(checkIFrame(iframe)));
     }
@@ -92,7 +95,18 @@ $(document).ready(function(){
         var randomVideoUrl = urlWatch + id;
         $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
         $(".share-link-modal a.link-video").html(randomVideoUrl);
-        $("button.btn-fb-share").attr('data-id', id);
+        $("button.btn-fb-share, button.btn-tw-share").attr('data-id', id);
+    }
+
+    var getUrl = function(id) {
+        var urlToShare = baseUrl;
+        var videoId = id;
+
+        if(videoId != undefined) {
+            urlToShare = urlWatch + videoId;
+        }
+
+        return urlToShare;
     }
 
     var checkIFrame = function(iframe) {

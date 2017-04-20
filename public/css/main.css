@@ -119,6 +119,10 @@ div.share-container {
     justify-content: center;
 }
 
+div.share-container button:focus {
+    color: white;
+}
+
 div.share-container button:not(:last-child) {
     margin-right: 8px;
 }
@@ -132,6 +136,17 @@ button.btn-fb-share:hover {
     background-color: #365899;
     color: white;
 }
+
+button.btn-tw-share {
+    background-color: #1b95e0;
+    color: white;
+}
+
+button.btn-tw-share:hover {
+    background-color: #0c7abf;
+    color: white;
+}
+
 
 
 @keyframes spin {
