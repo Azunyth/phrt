@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     window.fbAsyncInit = function() {
         FB.init({
-          appId      : '1409954279075055',
+          appId      : '1690438414594509',
           xfbml      : true,
           version    : 'v2.9'
         });
@@ -39,10 +39,7 @@ $(document).ready(function(){
                     changeIframe(res.iframe);
                     $('<button class="btn btn-danger btn-lg btn-reload">'+giveme+'</button>').appendTo("div.iframe-container");
                     $("div.iframe-wrapper").toggle();
-                    var randomVideoUrl = urlWatch + res.id;
-                    $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
-                    $(".share-link-modal a.link-video").html(randomVideoUrl);
-                    $("button.btn-fb-share").attr('data-id', res.id);
+                    updateButtonsShare(res.id);
                 }
             })
         }, 1000)
@@ -63,9 +60,12 @@ $(document).ready(function(){
                 self.removeAttr('disabled');
                 self.html(giveme);
                 changeIframe(res.iframe);
+                updateButtonsShare(res.id);
             });
         }, 600);
     });
+
+
 
     $("button.btn-fb-share").on('click', function(e) {
         var self = $(this);
@@ -81,11 +81,18 @@ $(document).ready(function(){
             display: 'popup',
             href: urlToShare,
             quote: "The FapRoulette has choosen for me !"
-          }, function(response){});
+        }, function(response){});
     });
 
     var changeIframe = function(iframe) {
         $("div.iframe-wrapper").empty().append($.parseHTML(checkIFrame(iframe)));
+    }
+
+    var updateButtonsShare = function(id) {
+        var randomVideoUrl = urlWatch + id;
+        $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
+        $(".share-link-modal a.link-video").html(randomVideoUrl);
+        $("button.btn-fb-share").attr('data-id', id);
     }
 
     var checkIFrame = function(iframe) {
