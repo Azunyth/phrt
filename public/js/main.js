@@ -72,13 +72,13 @@ $(document).ready(function(){
             method: 'share',
             display: 'popup',
             href: urlToShare,
-            quote: "The FapRoulette has choosen for me !"
+            quote: "The FapRoulette chose for me !"
         }, function(response){});
     });
 
     $("button.btn-tw-share").on('click', function(e) {
         var self = $(this);
-        var text = encodeURI("The FapRoulette has choosen for me !");
+        var text = encodeURI("The FapRoulette chose for me !");
         var urlToShare = encodeURI(getUrl(self.attr('data-id')));
 
         var link = "https://twitter.com/intent/tweet?text="+text+"&url="+urlToShare;
