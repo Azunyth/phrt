@@ -34,7 +34,7 @@ router.get('/watch/:id', (req, res) => {
     if(regObjId.test(id)) {
         req.db.collection('datacontent').findOne({_id: ObjectId(id)}, function(err, video) {
             if(err) {
-                console.log(err);
+                return res.status(404).render('404.hbs');
             }
 
             res.render('random.hbs', {iframe: video.IFRAME, id: video._id});
@@ -42,6 +42,29 @@ router.get('/watch/:id', (req, res) => {
     } else {
         res.status(404).render('404.hbs');
     }
-})
+});
+
+router.get('/watch', (req, res) => {
+
+    if(!req.query.tags || !req.query.tags.trim()) {
+        return res.render('tags.hbs');
+    }
+
+    var tag = req.query.tags.trim();
+
+    req.db
+        .collection('datacontent')
+        .aggregate( [
+            { $match: { $or: [ { TAGS : {'$regex' : tag, '$options' : 'i'} } ] } },
+            { $sample : { size: 1 } }
+        ]).nextObject(function(err, video) {
+            if(video) {
+                return res.render('tags.hbs', { tags: tag, iframe: video.IFRAME, id: video._id });
+            }
+
+            res.render('tags.hbs', { tags: tag });
+        });
+
+});
 
 module.exports = router;
