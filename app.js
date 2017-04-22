@@ -3,7 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
-require('./config');
+require('./config')(app);
 var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 var db;
 
@@ -22,12 +22,11 @@ app.use('/', (req, res, next) => {
     next();
 })
 
-app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/', require('./web/router'));
 
 app.all('*', (req, res) => {
-    res.status(404).render('404.ejs');
+    res.status(404).render('404.hbs');
 });
 
 var port = process.env.PORT || 1337;

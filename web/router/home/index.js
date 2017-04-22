@@ -3,7 +3,7 @@ var ObjectId = require('mongodb').ObjectId;
 
 router.get('/', (req, res) => {
     req.db.collection('video').find((err, data) =>  {
-        res.render('index.ejs');
+        res.render('home.hbs');
     });
 });
 
@@ -20,7 +20,7 @@ router.get('/random-video', (req, res) => {
         if(isAjax) {
             res.json(vid);
         } else {
-            res.render('random.ejs', vid);
+            res.render('random.hbs', vid);
         }
 
     });
@@ -37,10 +37,10 @@ router.get('/watch/:id', (req, res) => {
                 console.log(err);
             }
 
-            res.render('random.ejs', {iframe: video.IFRAME, id: video._id});
+            res.render('random.hbs', {iframe: video.IFRAME, id: video._id});
         })
     } else {
-        res.render('404.ejs');
+        res.status(404).render('404.hbs');
     }
 })
 
