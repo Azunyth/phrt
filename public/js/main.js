@@ -85,6 +85,14 @@ $(document).ready(function(){
 
         window.open(link, '_blank', 'toolbar=0,location=0,menubar=0, width=500, height=250');
 
+    });
+
+    $("button.btn-share").on('click', function(e) {
+        var self = $(this);
+        var id = self.attr('data-id');
+        var randomVideoUrl = urlWatch + id;
+        $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
+        $(".share-link-modal a.link-video").html(randomVideoUrl);
     })
 
     var changeIframe = function(iframe) {
@@ -92,10 +100,7 @@ $(document).ready(function(){
     }
 
     var updateButtonsShare = function(id) {
-        var randomVideoUrl = urlWatch + id;
-        $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
-        $(".share-link-modal a.link-video").html(randomVideoUrl);
-        $("button.btn-fb-share, button.btn-tw-share").attr('data-id', id);
+        $("button.btn-fb-share, button.btn-tw-share, button.btn-share").attr('data-id', id);
     }
 
     var getUrl = function(id) {
