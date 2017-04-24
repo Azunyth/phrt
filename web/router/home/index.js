@@ -50,19 +50,22 @@ router.get('/watch', (req, res) => {
         return res.render('tags.hbs');
     }
 
-    var tag = req.query.tags.trim();
+    var tagsInReq = req.query.tags.trim();
+    var tags = tagsInReq.split(' ').map((tag) => {
+        return { TAGS: { '$regex' : tag, '$options' : 'i' } }
+    });
 
     req.db
         .collection('datacontent')
         .aggregate( [
-            { $match: { $or: [ { TAGS : {'$regex' : tag, '$options' : 'i'} } ] } },
+            { $match: { $and: tags } },
             { $sample : { size: 1 } }
         ]).nextObject(function(err, video) {
             if(video) {
-                return res.render('tags.hbs', { tags: tag, iframe: video.IFRAME, id: video._id });
+                return res.render('tags.hbs', { tags: tagsInReq, iframe: video.IFRAME, id: video._id });
             }
 
-            res.render('tags.hbs', { tags: tag });
+            res.render('tags.hbs', { tags: tagsInReq });
         });
 
 });
