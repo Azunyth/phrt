@@ -54,7 +54,7 @@ router.get('/watch', (req, res) => {
     var tagsInReq = req.query.tags.trim();
 
     req.esclient.search({
-        index: 'phrt',
+        index: process.env.DB_NAME,
           type: 'datacontent',
           body: {
               size: 30,
