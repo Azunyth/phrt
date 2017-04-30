@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
+var elasticsearch = require('elasticsearch');
 require('./config')(app);
 var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 var db;
@@ -17,7 +18,13 @@ MongoClient.connect(url, (err, database) => {
     });
 });
 
+var client = new elasticsearch.Client({
+  host: 'localhost:9200',
+  log: 'trace'
+});
+
 app.use('/', (req, res, next) => {
+    req.esclient = client;
     req.db = db;
     next();
 })

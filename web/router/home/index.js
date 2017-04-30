@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var ObjectId = require('mongodb').ObjectId;
+var Utils = require('../../../helpers/utils');
 
 router.get('/', (req, res) => {
     req.db.collection('video').find((err, data) =>  {
@@ -51,22 +52,53 @@ router.get('/watch', (req, res) => {
     }
 
     var tagsInReq = req.query.tags.trim();
-    var tags = tagsInReq.split(' ').map((tag) => {
-        return { TAGS: { '$regex' : tag, '$options' : 'i' } }
+
+    req.esclient.search({
+        index: 'phrt',
+          type: 'datacontent',
+          body: {
+              size: 30,
+              query: {
+                  function_score : {
+                      query : {
+                            match: {
+                                TAGS: {
+                                    query: tagsInReq,
+                                    minimum_should_match: "1<-25% "
+                                }
+                            }
+                        },
+                      random_score: {}
+                  }
+              }
+          }
+    }).then(function(data) {
+        var nbVideosFound = data.hits.hits.length;
+        if(data.hits.total > 0) {
+            var rand = nbVideosFound == 0 ? 0 : Utils.random(0, nbVideosFound -1);
+
+            return res.render('tags.hbs', { tags: tagsInReq, iframe: data.hits.hits[rand]._source.IFRAME, id: data.hits.hits[rand]._id });
+        } else {
+            return res.render('tags.hbs', { tags: tagsInReq });
+        }
+    }, function(error){
+        var tags = tagsInReq.split(' ').map((tag) => {
+            return { TAGS: { '$regex' : tag, '$options' : 'i' } }
+        });
+        req.db
+            .collection('datacontent')
+            .aggregate( [
+                { $match: { $and: tags } },
+                { $sample : { size: 1 } }
+            ]).nextObject(function(err, video) {
+                if(video) {
+                    return res.render('tags.hbs', { tags: tagsInReq, iframe: video.IFRAME, id: video._id });
+                }
+
+                res.render('tags.hbs', { tags: tagsInReq });
+            });
     });
 
-    req.db
-        .collection('datacontent')
-        .aggregate( [
-            { $match: { $and: tags } },
-            { $sample : { size: 1 } }
-        ]).nextObject(function(err, video) {
-            if(video) {
-                return res.render('tags.hbs', { tags: tagsInReq, iframe: video.IFRAME, id: video._id });
-            }
-
-            res.render('tags.hbs', { tags: tagsInReq });
-        });
 
 });
 

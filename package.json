@@ -12,8 +12,16 @@
     "csv": "^1.1.1",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
+    "elasticsearch": "^13.0.0",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
+    "font-awesome": "^4.7.0",
     "mongodb": "^2.2.25"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-uglify": "^2.1.2",
+    "gulp-watch": "^4.3.11"
   }
 }
