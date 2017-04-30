@@ -37,10 +37,10 @@ app.all('*', (req, res) => {
     res.status(404).render('404.hbs');
 });
 
-var sm = sitemap({
-  sitemap: 'public/sitemap.xml',
-  robots: 'public/robots.txt',
-  sitemapSubmission: '/sitemap.xml'
-});
-sm.generate(app, ['/']);
-sm.toFile();
+// var sm = sitemap({
+//   sitemap: 'public/sitemap.xml',
+//   robots: 'public/robots.txt',
+//   sitemapSubmission: '/sitemap.xml'
+// });
+// sm.generate(app, ['/']);
+// sm.toFile();
