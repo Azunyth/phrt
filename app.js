@@ -38,9 +38,16 @@ app.all('*', (req, res) => {
 });
 
 // var sm = sitemap({
+//   http: 'http',
+//   url: 'faproulette.win',
 //   sitemap: 'public/sitemap.xml',
 //   robots: 'public/robots.txt',
-//   sitemapSubmission: '/sitemap.xml'
+//   sitemapSubmission: '/sitemap.xml',
+//   route: {
+//       '/watch/:id' : {
+//           hide: true
+//       }
+//   }
 // });
 // sm.generate(app, ['/']);
 // sm.toFile();
