@@ -1,5 +1,6 @@
 var dotenv = require('dotenv');
 var path = require('path');
+var sitemap = require('express-sitemap');
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
@@ -7,6 +8,7 @@ var elasticsearch = require('elasticsearch');
 require('./config')(app);
 var url = "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 var db;
+var port = process.env.PORT || 1337;
 
 MongoClient.connect(url, (err, database) => {
     if (err) throw err;
@@ -35,4 +37,10 @@ app.all('*', (req, res) => {
     res.status(404).render('404.hbs');
 });
 
-var port = process.env.PORT || 1337;
+var sm = sitemap({
+  sitemap: 'public/sitemap.xml',
+  robots: 'public/robots.txt',
+  sitemapSubmission: '/sitemap.xml'
+});
+sm.generate(app, ['/']);
+sm.toFile();

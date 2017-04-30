@@ -74,13 +74,16 @@ router.get('/watch', (req, res) => {
           }
     }).then(function(data) {
         var nbVideosFound = data.hits.hits.length;
-        if(data.hits.total > 0) {
+        var dataInView = { tags: tagsInReq };
+
+        if(nbVideosFound > 0) {
             var rand = nbVideosFound == 0 ? 0 : Utils.random(0, nbVideosFound -1);
 
-            return res.render('tags.hbs', { tags: tagsInReq, iframe: data.hits.hits[rand]._source.IFRAME, id: data.hits.hits[rand]._id });
-        } else {
-            return res.render('tags.hbs', { tags: tagsInReq });
+            dataInView.iframe = data.hits.hits[rand]._source.IFRAME;
+            dataInView.id = data.hits.hits[rand]._id;
         }
+
+        return res.render('tags.hbs', dataInView);
     }, function(error){
         var tags = tagsInReq.split(' ').map((tag) => {
             return { TAGS: { '$regex' : tag, '$options' : 'i' } }
