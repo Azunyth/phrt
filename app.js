@@ -46,6 +46,9 @@ app.all('*', (req, res) => {
 //   route: {
 //       '/watch/:id' : {
 //           hide: true
+//       },
+//       '*' : {
+//           hide: true
 //       }
 //   }
 // });
