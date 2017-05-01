@@ -37,8 +37,10 @@ router.get('/watch/:id', (req, res) => {
             if(err) {
                 return res.status(404).render('404.hbs');
             }
+            var regQuote = /^\"(.*)\"$/;
+            var cleanIframe = video.IFRAME.replace(regQuote, '$1');
 
-            res.render('random.hbs', {iframe: video.IFRAME, id: video._id});
+            res.render('random.hbs', {iframe: cleanIframe, id: video._id});
         })
     } else {
         res.status(404).render('404.hbs');
@@ -52,6 +54,7 @@ router.get('/watch', (req, res) => {
     }
 
     var tagsInReq = req.query.tags.trim();
+    var regQuote = /^\"(.*)\"$/;
 
     req.esclient.search({
         index: process.env.DB_NAME,
@@ -79,7 +82,7 @@ router.get('/watch', (req, res) => {
         if(nbVideosFound > 0) {
             var rand = nbVideosFound == 0 ? 0 : Utils.random(0, nbVideosFound -1);
 
-            dataInView.iframe = data.hits.hits[rand]._source.IFRAME;
+            dataInView.iframe = data.hits.hits[rand]._source.IFRAME.replace(regQuote, '$1');
             dataInView.id = data.hits.hits[rand]._id;
         }
 
@@ -95,6 +98,7 @@ router.get('/watch', (req, res) => {
                 { $sample : { size: 1 } }
             ]).nextObject(function(err, video) {
                 if(video) {
+                    var cleanIframe = video.IFRAME.replace(regQuote, '$1');
                     return res.render('tags.hbs', { tags: tagsInReq, iframe: video.IFRAME, id: video._id });
                 }
 
