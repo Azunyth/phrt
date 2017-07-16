@@ -110,6 +110,25 @@ div.iframe-container > div.loading-infos {
      font-weight: bold;
 }
 
+div.guess-game-rules {
+    text-align: left;
+}
+
+div.guess-game-rules blockquote > ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+div.guees-summary span.label {
+    margin-right: 5px;
+}
+
+div.guees-summary span.label button.close {
+    float: none;
+    vertical-align: bottom;
+}
+
+
 button.btn-reload span.loader {
     margin-left: 10px;
 }
@@ -146,6 +165,8 @@ button.btn-tw-share:hover {
     background-color: #0c7abf;
     color: white;
 }
+
+
 
 @keyframes spin {
     from { transform: rotateZ(0deg);}

@@ -1,0 +1,111 @@
+{{#> main }}
+    {{#*inline "body" }}
+        <div ng-app="app" ng-controller="GuessCtrl">
+            <div class="guess-game-rules">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2>Rules
+                            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#rules" aria-expanded="false" aria-controls="rules">
+                                Show/Hide rules
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 class="text-right text-success">Current points : <span class="current-points">{{ score }}</span></h2>
+                    </div>
+                </div>
+
+                <blockquote id="rules" class="collapse">
+                    <ul>
+                        <li>Chose your category : tags or actresses</li>
+                        <li>Watch the random video then :
+                            <ul>
+                                <li>Guess the maximum tags or actresses (separate by commas)</li>
+                                <li>A correct tag gives you 1 point, a wrong one, -1</li>
+                                <li>A correct actress gives you 3 point, a wrong one, 0</li>
+                            </ul>
+                        </li>
+                        <li>Good luck and happy fap !</li>
+                    </ul>
+                </blockquote>
+            </div>
+
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                  <a href="#guess-tags" aria-controls="home" role="tab" data-toggle="tab">By tags</a>
+              </li>
+              <li role="presentation">
+                  <a href="#guess-actresses" aria-controls="home" role="tab" data-toggle="tab">By actresses</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="guess-tags" role="tabpanel" class="tab-pane active">
+                    <div class="iframe-container" >
+                        <div class="loading-infos">
+                            <span class="big-loader"></span>
+                            <p class="loader-text">Random done, fap incomming</p>
+                        </div>
+                        <div class="iframe-wrapper" style="display: block">
+                            {{{ video.iframe }}}
+                        </div>
+                    </div>
+                    <div class="guees-summary" ng-cloak>
+                        <h3>Tags summary :
+                            <span class="label label-info" ng-repeat="tag in tagsFilled track by $index">
+                                {[{ tag }]}
+                                <button type="button" class="close" ng-click="deleteTag($index)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </span>
+                        </h3>
+                    </div>
+                    <form method="post" action="/guess/tags">
+                        <input type="hidden" name="videoSelected" value="{{ video.id }}">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control guess-ipt" ng-model="tags" placeholder="Tags..." name="tags" aria-describedby="sizing-addon1">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary btn-guess-tags" type="submit" ng-disabled="tagsFilled.length < 1">Guess tag(s) !</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div id="guess-actresses" role="tabpanel" class="tab-pane">
+                    <div class="iframe-container" >
+                        <div class="loading-infos">
+                            <span class="big-loader"></span>
+                            <p class="loader-text">Random done, fap incomming</p>
+                        </div>
+                        <div class="iframe-wrapper" style="display: block">
+                            {{{ video.iframe }}}
+                        </div>
+                    </div>
+                    <div class="guees-summary">
+                        <h3>Actresses summary :
+                            <span class="label label-info" ng-repeat="actress in actressesFilled track by $index">
+                                {[{ tag }]}
+                                <button type="button" class="close" ng-click="deleteActress($index)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </span>
+                        </h3>
+                    </div>
+                    <form method="post" action="/guess/actresses">
+                        <input type="hidden" name="videoSelected" value="{{ video.id }}">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control guess-ipt" ng-model="actresses" placeholder="Actresses..." name="actresses" aria-describedby="sizing-addon1">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary btn-guess-actresses" type="submit" ng-disabled="actressesFilled.length < 1">Guess actress(es) !</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/inline}}
+
+    {{#*inline "scripts"}}
+        <script src="/dist/angular.min.js"></script>
+        <script src="/js/app/app.module.js"></script>
+        <script src="/js/app/app.config.js"></script>
+        <script src="/js/app/app.service.js"></script>
+        <script src="/js/app/guess/guess.module.js"></script>
+        <script src="/js/app/guess/guess.controller.js"></script>
+    {{/inline}}
+{{/main}}

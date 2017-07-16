@@ -9,14 +9,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.4",
+    "body-parser": "^1.17.2",
+    "consolidate": "^0.14.5",
     "csv": "^1.1.1",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "elasticsearch": "^13.0.0",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.3",
     "express-sitemap": "^1.7.0",
     "font-awesome": "^4.7.0",
+    "handlebars-layouts": "^3.1.4",
     "mongodb": "^2.2.25"
   },
   "devDependencies": {

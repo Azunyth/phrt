@@ -66,8 +66,6 @@ $(document).ready(function(){
         }
     });
 
-
-
     $("button.btn-fb-share").on('click', function(e) {
         var self = $(this);
         var urlToShare = getUrl(self.attr('data-id'));
@@ -97,7 +95,20 @@ $(document).ready(function(){
         var randomVideoUrl = (id === undefined) ? baseUrl : urlWatch + id;
         $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
         $(".share-link-modal a.link-video").html(randomVideoUrl);
-    })
+    });
+
+    // $("[id^=guess-]").on('submit', function(e) {
+    //     e.preventDefault();
+    //
+    //     if(!$(this).find('input.guess-ipt').eq(0).val()) {
+    //         return false;
+    //     }
+    //     if($(this).is('#guess-tags')) {
+    //         console.log('tags');
+    //     } else {
+    //         console.log('actress')
+    //     }
+    // });
 
     var changeIframe = function(iframe) {
         $("div.iframe-wrapper").empty().append($.parseHTML(checkIFrame(iframe)));
@@ -128,4 +139,5 @@ $(document).ready(function(){
 
         return iframeOk;
     }
-})
+
+});

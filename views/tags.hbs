@@ -1,33 +1,39 @@
-<form class="" method="get">
-    <div class="input-group input-group-lg">
-        <input type="text" class="form-control" placeholder="Tags..." value="{{ tags }}" name="tags" aria-describedby="sizing-addon1">
-        <span class="input-group-btn">
-            <button class="btn btn-primary btn-search-tags" type="submit">Random !</button>
-        </span>
-    </div>
-</form>
+{{#> main }}
+    {{#*inline "body" }}
+        <form class="" method="get">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="You should try : funny" value="{{ tags }}" name="tags" aria-describedby="sizing-addon1">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-search-tags" type="submit">Random !</button>
+                </span>
+            </div>
+        </form>
 
-{{#if iframe }}
-<div class="iframe-container" >
-    <div class="loading-infos">
-        <span class="big-loader"></span>
-        <p class="loader-text">Random done, fap incomming</p>
-    </div>
-    <div class="iframe-wrapper" style="display: block">
-        {{{ iframe }}}
-    </div>
-    <button class="btn btn-danger btn-lg btn-reload">Give me another random fap !</button>
-</div>
+        {{#if iframe }}
+        <div class="iframe-container" >
+            <div class="loading-infos">
+                <span class="big-loader"></span>
+                <p class="loader-text">Random done, fap incomming</p>
+            </div>
+            <div class="iframe-wrapper" style="display: block">
+                {{{ iframe }}}
+            </div>
+            <button class="btn btn-danger btn-lg btn-reload">Give me another random fap !</button>
+        </div>
 
-<div class="share-container">
-    <button class="btn btn-tw-share" data-id="{{ id }}">
-        <i class="fa fa-twitter" aria-hidden="true"></i> Twitter
-    </button>
-    <button class="btn btn-sm btn-fb-share" data-id="{{ id }}">
-        <i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook
-    </button>
-    <button class="btn btn-warning btn-sm btn-share" data-id="{{ id }}" data-toggle="modal" data-target=".share-link-modal">
-        <i class="fa fa-share-alt" aria-hidden="true"></i> Share link
-    </button>
-</div>
-{{/if}}
+        <div class="share-container">
+            <button class="btn btn-tw-share" data-id="{{ id }}">
+                <i class="fa fa-twitter" aria-hidden="true"></i> Twitter
+            </button>
+            <button class="btn btn-sm btn-fb-share" data-id="{{ id }}">
+                <i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook
+            </button>
+            <button class="btn btn-warning btn-sm btn-share" data-id="{{ id }}" data-toggle="modal" data-target=".share-link-modal">
+                <i class="fa fa-share-alt" aria-hidden="true"></i> Share link
+            </button>
+        </div>
+        {{/if}}
+    {{/inline}}
+    {{#*inline "scripts"}}
+    {{/inline}}
+{{/main}}

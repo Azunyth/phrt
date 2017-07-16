@@ -29,6 +29,11 @@ gulp.task('fontawesome', function() {
             .pipe(gulp.dest(conf.public + '/fonts'));
 });
 
+gulp.task('angular', function() {
+    return gulp.src(conf.modules +  '/angular/angular.min.js')
+        .pipe(gulp.dest(conf.dist));
+});
+
 gulp.task('watch-css', function() {
     return gulp.watch('public/css/*.css', ['minify-css']);
 });
