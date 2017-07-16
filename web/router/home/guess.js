@@ -11,9 +11,6 @@ router.use('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-
-
-
     req.esclient.search({
         index: process.env.DB_NAME,
           type: 'datacontent',
@@ -42,8 +39,6 @@ router.get('/', (req, res) => {
             vid.id = data.hits.hits[rand]._id;
         }
 
-        console.log(vid.tags);
-
         return res.render('guess.hbs', {video :vid, score: req.session.score});
     }, function(error){
         console.log(error);
@@ -63,9 +58,6 @@ router.get('/', (req, res) => {
             res.render('guess.hbs', {video :vid, score: req.session.score});
         });
     });
-
-
-
 });
 
 router.post('/tags', (req, res) => {
@@ -73,7 +65,6 @@ router.post('/tags', (req, res) => {
     var id = data.videoSelected;
     var tagsStr = data.tags;
     var tags = tagsStr.split(',');
-
     var regObjId = /^[0-9a-fA-F]{24}$/;
 
     if(regObjId.test(id)) {
@@ -84,14 +75,10 @@ router.post('/tags', (req, res) => {
 
             var videoTags = Utils.sanitize(video.TAGS.toLowerCase());
 
-
             for(var i = 0, len = tags.length; i < len; i++) {
                 var regGuess = new RegExp("(?:^|\\W)"+tags[i].trim()+"(?=\\W|$)", "gi");
 
-                console.log(regGuess);
-
                 if(regGuess.test(videoTags)) {
-                    console.log('ok');
                     req.session.score++;
                     videoTags = videoTags.replace(regGuess, '').trim();
                 } else {
