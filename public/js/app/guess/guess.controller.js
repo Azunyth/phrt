@@ -12,7 +12,7 @@ angular.module('guess')
         }
 
         $scope.$watch('tags', function(newValue, oldValue) {
-            if(newValue) {
+            if(newValue != oldValue) {
                 Guess.parseTags(newValue);
             }
         });
