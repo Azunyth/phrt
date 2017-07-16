@@ -3,6 +3,7 @@ angular.module('app')
         return {
             tagsFilled : [],
             actressesFilled : [],
+            tagsClue: [],
 
             deleteTag: function(idx) {
                 this.tagsFilled.splice(idx, 1);
@@ -27,7 +28,17 @@ angular.module('app')
                         self.actressesFilled.push(e.trim());
                     }
                 });
+            },
+            parseClues : function(clues) {
+                var self = this;
+                self.tagsClue.length = 0;
+                clues.forEach(function(e) {
+                    if(e) {
+                        self.tagsClue.push(e.toLowerCase().trim());
+                    }
+                });
             }
+
         }
 
     }])

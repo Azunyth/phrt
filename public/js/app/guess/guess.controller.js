@@ -1,10 +1,13 @@
 angular.module('guess')
-    .controller('GuessCtrl', ['$scope', 'Guess', function($scope, Guess) {
+    .controller('GuessCtrl', ['$scope', '$http', 'Guess', function($scope, $http, Guess) {
 
         //TODO: Factorize this shitty code
 
         $scope.tagsFilled = Guess.tagsFilled;
         $scope.actressesFilled = Guess.actressesFilled;
+        $scope.clues = Guess.tagsClue;
+        $scope.error = "";
+        $scope.score = 0;
 
         $scope.deleteTag = function(idx) {
             Guess.deleteTag(idx);
@@ -27,5 +30,20 @@ angular.module('guess')
                 Guess.parseActresses(newValue);
             }
         });
+
+        $scope.closeAlert = function() {
+            $scope.error = "";
+        }
+
+        $scope.getClues = function(id) {
+            $http.get('/guess/clue/'+id).then(function success(response){
+                if(response.data) {
+                    Guess.parseClues(response.data.tags);
+                    $scope.score = response.data.score;
+                }
+            }, function error(response) {
+                $scope.error = response.data.error;
+            })
+        }
 
     }]);

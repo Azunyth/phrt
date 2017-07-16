@@ -11,7 +11,7 @@
                         </h2>
                     </div>
                     <div class="col-md-3">
-                        <h2 class="text-right text-success">Current points : <span class="current-points">{{ score }}</span></h2>
+                        <h2 class="text-right text-success">Current points : <span class="current-points" ng-init="score = {{ score }}" ng-cloak>{[{ score }]}</span></h2>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                             {{{ video.iframe }}}
                         </div>
                     </div>
-                    <div class="guees-summary" ng-cloak>
+                    <div class="guess-summary" ng-cloak>
                         <h3>Tags summary :
                             <span class="label label-info" ng-repeat="tag in tagsFilled track by $index">
                                 {[{ tag }]}
@@ -56,6 +56,24 @@
                             </span>
                         </div>
                     </form>
+                    <div class="clues-container">
+                        <button ng-hide="clues.length > 0" type="button" class="btn btn-success btn-lg" ng-click="getClues('{{video.id}}')">
+                            <span class="glyphicon glyphicon-search"></span> Get clues !
+                        </button>
+
+                        <div ng-show="clues.length > 0" class="clue-summary" ng-cloak>
+                            <h3>Clues:
+                                <span class="label label-info" ng-repeat="clue in clues track by $index">
+                                    {[{ clue }]}
+                                </span>
+                            </h3>
+                        </div>
+
+                        <div ng-if="error" ng-cloak class="alert alert-danger alert-dismissible clue-error" role="alert">
+                            <button type="button" class="close" ng-click="closeAlert()"><span aria-hidden="true">&times;</span></button>
+                            {[{ error }]}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

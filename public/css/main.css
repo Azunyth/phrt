@@ -119,15 +119,23 @@ div.guess-game-rules blockquote > ul{
     padding-left: 0px;
 }
 
-div.guees-summary span.label {
+div.guess-summary span.label,
+div.clue-summary span.label {
     margin-right: 5px;
 }
 
-div.guees-summary span.label button.close {
+div.guess-summary span.label button.close {
     float: none;
     vertical-align: bottom;
 }
 
+div.clues-container {
+    margin-top: 10px;
+}
+
+div.clue-error {
+    margin-top: 15px;
+}
 
 button.btn-reload span.loader {
     margin-left: 10px;

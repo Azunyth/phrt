@@ -41,7 +41,6 @@ router.get('/', (req, res) => {
 
         return res.render('guess.hbs', {video :vid, score: req.session.score});
     }, function(error){
-        console.log(error);
         req.db.collection('datacontent').aggregate( [
                 { $match : { TAGS: { $ne: "" } } },
                 { $sample : { size: 1 } }
@@ -91,6 +90,38 @@ router.post('/tags', (req, res) => {
     } else {
         res.status(404).render('404.hbs');
     }
+});
+
+router.get('/clue/:id', (req, res) => {
+    var isAjax = req.xhr;
+    var regObjId = /^[0-9a-fA-F]{24}$/;
+    var id = req.params.id;
+
+    if(!isAjax) {
+        return res.redirect("/guess");
+    }
+
+    if(regObjId.test(id)) {
+        req.db.collection('datacontent').findOne({_id: ObjectId(id)}, function(err, video) {
+            if(err) {
+                return res.status(404).json({error: "Oops, cannot get your clues !"});
+            }
+            req.session.score -= 3;
+
+            var tagsStr = Utils.sanitize(video.TAGS.toLowerCase());
+            var tags = tagsStr.split(" ");
+            var hiddenTags = [];
+
+            for(var i = 0, len = tags.length; i < len; i++) {
+                hiddenTags.push(Utils.hideLettersInWord(tags[i]));
+            }
+
+            return res.json({tags: hiddenTags, score: req.session.score});
+        });
+    } else {
+        return res.status(404).json({error: "Oops, cannot get your clues !"});
+    }
+
 });
 
 module.exports = router;
