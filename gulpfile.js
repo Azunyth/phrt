@@ -38,4 +38,4 @@ gulp.task('watch-css', function() {
     return gulp.watch('public/css/*.css', ['minify-css']);
 });
 
-gulp.task('default', ['minify-css', 'minify-js', 'fontawesome']);
+gulp.task('default', ['minify-css', 'minify-js', 'fontawesome', 'angular']);
