@@ -66,13 +66,13 @@ div.btn-launch:hover {
     border-color: #cf5686;
 }
 
-div.wheel-wrapper img.turn {
+div.wheel-wrapper img.turn.slow {
     animation: spin 20s linear infinite;
     -webkit-animation: spin 20s linear infinite;
     max-width: 100%;
 }
 
-div.wheel-wrapper img.turn.fast {
+div.wheel-wrapper img.turn {
     animation: spin 0.5s linear infinite;
     -webkit-animation: spin 0.5s linear infinite;
 }

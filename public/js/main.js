@@ -22,11 +22,7 @@ $(document).ready(function(){
     var urlWatch = baseUrl + 'watch/';
 
     $("div.btn-launch").on("click", function(e) {
-        // $(this).siblings('img').eq(0).css({
-        //     animationDuration: '0.5s'
-        // });
-        $('img.turn').addClass('fast');
-
+        $('img.turn').removeClass('slow');
 
         setTimeout(function() {
             $.ajax({
