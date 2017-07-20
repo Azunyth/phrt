@@ -25,7 +25,7 @@ $(document).ready(function(){
         // $(this).siblings('img').eq(0).css({
         //     animationDuration: '0.5s'
         // });
-        $(this).siblings('img').eq(0).addClass('fast');
+        $('img.turn').addClass('fast');
 
 
         setTimeout(function() {
@@ -41,7 +41,7 @@ $(document).ready(function(){
                     updateButtonsShare(res.id);
                 }
             })
-        }, 1000)
+        }, 500)
 
     });
 
