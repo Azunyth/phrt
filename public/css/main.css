@@ -200,11 +200,9 @@ button.btn-tw-share:hover {
 
 @-webkit-keyframes spin {
     from {
-        transform: rotateZ(0deg);
         -webkit-transform: rotateZ(0deg);
     }
     to {
-        transform: rotateZ(360deg);
         -webkit-transform: rotateZ(360deg);
     }
 }
@@ -218,7 +216,6 @@ button.btn-tw-share:hover {
 @-webkit-keyframes collapse {
     100% {
         -webkit-transform: scale(0);
-        transform: scale(0);
     }
 }
 
@@ -230,7 +227,6 @@ button.btn-tw-share:hover {
 
 @-webkit-keyframes gobehind {
     100% {
-        z-index: -1;
         -webkit-z-index: -1;
     }
 }
