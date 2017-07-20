@@ -75,6 +75,7 @@ div.wheel-wrapper img.turn.slow {
 div.wheel-wrapper img.turn {
     animation: spin 0.5s linear infinite;
     -webkit-animation: spin 0.5s linear infinite;
+    max-width: 100%;
 }
 
 div.wheel-container.collapse-wheel {
