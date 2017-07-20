@@ -73,7 +73,7 @@ div.wheel-wrapper img.turn.slow {
 }
 
 div.wheel-wrapper img.turn {
-    animation: spin 0.5s linear infinite;
+    /*animation: spin 0.5s linear infinite;*/
     -webkit-animation: spin 0.5s linear infinite;
     max-width: 100%;
 }
@@ -200,8 +200,14 @@ button.btn-tw-share:hover {
 
 
 @keyframes spin {
-    from { transform: rotateZ(0deg);}
-    to { transform: rotateZ(360deg);}
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+    }
 }
 
 @-webkit-keyframes spin {
