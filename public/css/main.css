@@ -72,6 +72,11 @@ div.wheel-wrapper img.turn {
     max-width: 100%;
 }
 
+div.wheel-wrapper img.turn.fast {
+    animation: spin 0.5s linear infinite;
+    -webkit-animation: spin 0.5s linear infinite;
+}
+
 div.wheel-container.collapse-wheel {
     position: absolute;
     top: 0;

@@ -22,9 +22,11 @@ $(document).ready(function(){
     var urlWatch = baseUrl + 'watch/';
 
     $("div.btn-launch").on("click", function(e) {
-        $(this).siblings('img').eq(0).css({
-            animationDuration: '0.5s'
-        });
+        // $(this).siblings('img').eq(0).css({
+        //     animationDuration: '0.5s'
+        // });
+        $(this).siblings('img').eq(0).addClass('fast');
+
 
         setTimeout(function() {
             $.ajax({
@@ -96,19 +98,6 @@ $(document).ready(function(){
         $(".share-link-modal a.link-video").attr('href', randomVideoUrl);
         $(".share-link-modal a.link-video").html(randomVideoUrl);
     });
-
-    // $("[id^=guess-]").on('submit', function(e) {
-    //     e.preventDefault();
-    //
-    //     if(!$(this).find('input.guess-ipt').eq(0).val()) {
-    //         return false;
-    //     }
-    //     if($(this).is('#guess-tags')) {
-    //         console.log('tags');
-    //     } else {
-    //         console.log('actress')
-    //     }
-    // });
 
     var changeIframe = function(iframe) {
         $("div.iframe-wrapper").empty().append($.parseHTML(checkIFrame(iframe)));
