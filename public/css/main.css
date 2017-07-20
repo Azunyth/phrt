@@ -20,6 +20,7 @@ div.main-container {
 div.iframe-container {
     margin: 20px;
     position: relative;
+    max-width: 100%;
 }
 
 div.iframe-wrapper {
@@ -35,17 +36,23 @@ div.wheel-wrapper {
 div.btn-launch {
     position: absolute;
     width: 250px;
+    max-width: 50%;
     height: 250px;
-    top: 125px;
-    left: 125px;
-    border-radius: 125px;
+    max-height: 50%;
+    top: 25%;
+    left: 25%;
+    border-radius: 50%;
     font-size: 25px;
     color: #fff;
     background-color: #f387b2;
     border-color: #f381ae;
-    text-align: center;
-    line-height: 250px;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+div.btn-launch > p {
+    width: 100%;
+    word-wrap: break-word;
 }
 
 div.btn-launch:hover {
@@ -57,6 +64,7 @@ div.btn-launch:hover {
 
 div.wheel-wrapper img.turn {
     animation: spin 20s linear infinite;
+    max-width: 100%;
 }
 
 div.wheel-container.collapse-wheel {
@@ -181,8 +189,26 @@ button.btn-tw-share:hover {
     to { transform: rotateZ(360deg);}
 }
 
+@-webkit-keyframes spin {
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+    }
+}
+
 @keyframes collapse {
     100% {
+        transform: scale(0);
+    }
+}
+
+@-webkit-keyframes collapse {
+    100% {
+        -webkit-transform: scale(0);
         transform: scale(0);
     }
 }
@@ -190,5 +216,12 @@ button.btn-tw-share:hover {
 @keyframes gobehind {
     100% {
         z-index: -1;
+    }
+}
+
+@-webkit-keyframes gobehind {
+    100% {
+        z-index: -1;
+        -webkit-z-index: -1;
     }
 }
